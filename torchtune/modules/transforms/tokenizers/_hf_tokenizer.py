@@ -54,6 +54,8 @@ class HuggingFaceBaseTokenizer(BaseTokenizer):
             self.generation_config = None
         self._infer_bos_eos_tokens()
         self._infer_should_add_bos_eos()
+        self.pad_id = self.eos_id
+        print("PAD ID", self.pad_id)
 
     def _get_token_from_config(self, config: Dict[str, Any], key: str) -> str:
         """
