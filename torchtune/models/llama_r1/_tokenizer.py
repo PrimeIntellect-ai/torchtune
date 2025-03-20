@@ -28,9 +28,11 @@ class LlamaR1Tokenizer(ModelTokenizer, Transform):
     def tokenize_messages(self, messages, add_end_tokens):
         messages_proc = [{"role": m.role, "content": m.content[0]["content"]} for m in messages]
         
-        chat_tokens = self.hf_template_tokenizer.apply_chat_template(messages_proc, tokenize=True)
+        chat_tokens = self.hf_template_tokenizer.apply_chat_template(messages_proc, tokenize=True)[:20000]
+        mask = [False]*len(chat_tokens)
+        mask = mask[:20000]
                                
-        return (chat_tokens, [False]*len(chat_tokens))
+        return (chat_tokens, mask)
     
     def __call__(
         self, sample, inference: bool = False
