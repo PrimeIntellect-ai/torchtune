@@ -30,7 +30,7 @@ class LlamaR1Tokenizer(ModelTokenizer, Transform):
         
         chat_tokens = self.hf_template_tokenizer.apply_chat_template(messages_proc, tokenize=True)[:20000]
         mask = [False]*len(chat_tokens)
-        mask = mask[:20000]
+        mask = mask[:23000]
                                
         return (chat_tokens, mask)
     
